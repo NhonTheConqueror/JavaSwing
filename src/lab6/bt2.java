@@ -1,13 +1,9 @@
 package lab6;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.util.HashMap;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class bt2 extends bt1{
 
@@ -29,6 +25,6 @@ public class bt2 extends bt1{
     }
 
     public static void main(String[] args) {
-        new bt2();
+        SwingUtilities.invokeLater(() -> new bt2());
     }
 }
