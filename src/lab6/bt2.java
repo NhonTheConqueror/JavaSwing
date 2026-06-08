@@ -3,6 +3,7 @@ package lab6;
 import java.awt.Color;
 import java.util.HashMap;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class bt2 extends bt1{
 
@@ -24,6 +25,6 @@ public class bt2 extends bt1{
     }
 
     public static void main(String[] args) {
-        new bt2();
+        SwingUtilities.invokeLater(() -> new bt2());
     }
 }
