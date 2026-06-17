@@ -28,13 +28,14 @@ public class bt5 {
             "3", "2", "1", "*",
             ".", "0", "/", "="
         };
-
+        String previous="";
         for(String i: elements){
-            JButton button = new JButton(i);
+            JButton button = new JButton(i); 
             button.addActionListener(e->{
                 if(i.equals("=")){
                     String ans = xCalculation(displayScreen.getText());
                     displayScreen.setText(ans);
+                    
                 }
                 else{displayScreen.setText(displayScreen.getText() + i);}
             });
@@ -54,32 +55,44 @@ public class bt5 {
 
 
     private String xCalculation(String text) {
-        Stack<Double> numQueue = new Stack<>();
-        Stack<Character> calQueue = new Stack<>();
+        Stack<String> queue = new Stack<>();
         String temp = "";
 
         for(int i = 0; i<text.length(); i++){
             char c = text.charAt(i);
             if(Character.isDigit(text.charAt(i)) || text.charAt(i)=='.'){
-                temp+=c; temp = "";
+                temp+=c;
+                if(i==text.length()-1){queue.push(temp);}
             }
             else{
-                numQueue.push(Double.parseDouble(temp));
-                if(c=='/' || c=='*'){
-                    Double a = numQueue.pop();
-                    Double b = numQueue.pop();
-                    numQueue.push( (c=='/') ? a/b : a*b );
-                }
-                calQueue.push(c);
+                queue.push(temp);
+                temp = "";
+                queue.push(Character.toString(c));
             }
         }
+        Stack<String> nonDStack = new Stack<>();
+        Stack<Double> DStack = new Stack<>();//digit stack
+        //solve multiply and devide
+        for(int i=0; i<queue.size();i++){
+            String item = queue.get(i);
+            if(item.equals("/") || item.equals("*")){
+                double z = Double.parseDouble(queue.get(i+1));
+                double a = DStack.pop();
+                double res = ((item.equals("/")) ? a/z : a*z);
+                DStack.push(res);
+                i++;
 
-        while(!calQueue.isEmpty()){
-                Double a = numQueue.pop();
-                Double b = numQueue.pop();
-                numQueue.push( (calQueue.pop()=='+') ? b+a : b-a );
+            }
+            else if(item.equals("+")||item.equals("-")){nonDStack.push(item);}
+            else{DStack.push(Double.parseDouble(item));}
         }
-        String ans = numQueue.pop().toString(); System.out.println(ans);
+        //solve plus and minus
+        while(!nonDStack.isEmpty()){
+                Double a = DStack.pop();
+                Double b = DStack.pop();
+                DStack.push( (nonDStack.pop().equals("+")) ? b+a : b-a );
+        }
+        String ans = DStack.pop().toString(); System.out.println(ans);
         return ans;
     }
 
