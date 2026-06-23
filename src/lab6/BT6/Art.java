@@ -3,12 +3,12 @@ package lab6.BT6;
 public class Art {
     private String name;
     private int createdYear;
-    private Type typeArt;
-    private ArtStyle style;
-    private Author au;
+    private String typeArt;
+    private String style;
+    private String au;
 
     /* */
-    public Art(String name, int createdYear, Type typeArt, ArtStyle style, Author au) {
+    public Art(String name, int createdYear, String typeArt, String style, String au) {
         this.name = name;
         this.createdYear = createdYear;
         this.typeArt = typeArt;
