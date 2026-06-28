@@ -6,7 +6,7 @@ public class app {
 	JFrame frame = new JFrame("giao dien xam cu");
 	JTextArea word = new JTextArea();{
 		word.setFont(new Font("Arial", Font.ITALIC, 15));
-		word.setBackground(Color.cyan);
+		//word.setBackground(Color.cyan);
 	}
 	JButton saveAsButton = new JButton("Save As");
 	JButton okButton = new JButton("Ok");
