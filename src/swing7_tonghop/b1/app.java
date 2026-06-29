@@ -132,6 +132,10 @@ public class app {
 		
 		menu.add(toolsMenu);
 		
+		
+		aboutItem.addActionListener(e -> {
+			runHelpFrame();
+		});
 		helpMenu.add(aboutItem);
 		menu.add(helpMenu);
 		
@@ -146,6 +150,27 @@ public class app {
 	}
 	
 	
+	private void runHelpFrame() {
+	    // Tạo icon
+	    ImageIcon icon = null;
+	    try {
+	        java.net.URL imgUrl = getClass().getResource("/about.png");
+	        if (imgUrl != null) {
+	            icon = new ImageIcon(imgUrl);
+	        }
+	    } catch (Exception e) {}
+	    
+	    // Hiển thị hộp thoại
+	    JOptionPane.showMessageDialog(
+	        frame,
+	        "Ứng dụng tính toán đơn giản\nPhiên bản 1.0\n© 2024 Your Name",
+	        "About",
+	        JOptionPane.INFORMATION_MESSAGE,
+	        icon
+	    );
+	}
+
+
 	public double calculating() {
 		double ans=0;
 		try {			
